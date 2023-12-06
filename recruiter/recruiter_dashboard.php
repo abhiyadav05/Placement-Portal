@@ -75,7 +75,7 @@
               while($row=mysqli_fetch_assoc($result)){
                 $student_id=$row['student_id'];
                 $student_about=$row['student_about'];
-                $resume=$row['resume'];
+               
                 $sn=1;
                 // now access the detail of student in student database 
                 $sql1="select * from student where student_id='$student_id';";
@@ -87,6 +87,7 @@
                     $branch=$row1['branch'];
                     $year=$row1['year'];
                     $percentage=$row1['percentage'];
+                    $student_resume=$row1['resume'];
 
                     echo '<tr>
                     <td>'.$sn.'</td>
@@ -96,7 +97,7 @@
                     <td>'.$percentage.'</td>
                     <td><a href="student_about.php?rc='.$recruiter_id.'&st='.$student_id.'" target="_blank"<button class="btn btn-primary" type="submit">See</button></a>
                 </td>
-                    <td><a href="'.$resume.'" target="_blank"<button class="btn btn-primary" type="submit">View</button></a>
+                    <td><a href="'.$student_resume.'" target="_blank"<button class="btn btn-primary" type="submit">View</button></a>
                 </td>
                     <td><a href=""<button class="btn btn-success" type="submit">Accept</button></a>
                     <a href="" <button class="btn btn-danger" type="submit">Reject</button></a>

@@ -12,9 +12,6 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         $student_id=$_GET['st'];
         $recruiter_id=$_GET['rc'];
         $student_about=$_POST['student_about'];
-        $filename=$_FILES['resume']['name'];
-        $tempname=$_FILES['resume']['tmp_name'];
-        $folder="../resume/".$filename;
 
         $sql="select * from apply where student_id='$student_id' and recruiter_id='$recruiter_id';";
         $result=mysqli_query($conn,$sql);
@@ -26,8 +23,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
           </div>';
         }
        else{
-        move_uploaded_file($tempname,$folder);
-        $insert="INSERT INTO `apply` (`student_about`, `resume`, `student_id`, `recruiter_id`, `apply_date`) VALUES ( '$student_about', '$folder', '$student_id', '$recruiter_id', current_timestamp());";
+        $insert="INSERT INTO `apply` (`student_about`, `student_id`, `recruiter_id`, `apply_date`) VALUES ( '$student_about', '$student_id', '$recruiter_id', current_timestamp());";
         $result2=mysqli_query($conn,$insert);
         if($result2){
             echo '<div class=" alert alert-success alert-dismissible fade show" role="alert">
@@ -75,11 +71,6 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     </div>
   </div>
 
-  <div class="mb-3">
-  <label for="validationTextarea" class="form-label">Upload Resume</label>
-    <input type="file" class="form-control" aria-label="file example" name="resume" required>
-    <div class="invalid-feedback">upload resume in pdf</div>
-  </div>
   <div class="mb-3">
     <button class="btn btn-outline-success" type="submit">Submit form</button>
   </div>

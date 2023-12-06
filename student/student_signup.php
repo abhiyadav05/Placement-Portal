@@ -9,6 +9,9 @@
         $enrollment=$_POST['enrollment_no'];
         $year=$_POST['year'];
         $percentage=$_POST['percentage'];
+        $filename=$_FILES['resume']['name'];
+        $tempname=$_FILES['resume']['tmp_name'];
+        $folder="../resume/".$filename;
         $password=$_POST['password'];
         $cpassword=$_POST['cpassword'];
 
@@ -25,9 +28,10 @@
             if($password==$cpassword){
                 $hash=password_hash($password,PASSWORD_DEFAULT);
                 $insert="
-                INSERT INTO `student` (`student_name`, `father_name`, `student_email`, `branch`, `enrollment_no`, `year`, `percentage`, `password`, `login_time`) VALUES ( '$student_name', '$father_name', '$student_email', '$branch', '$enrollment', '$year','$percentage', '$hash', current_timestamp());";
+                INSERT INTO `student` (`student_name`, `father_name`, `student_email`, `branch`, `enrollment_no`, `year`, `percentage`,`resume`, `password`, `login_time`) VALUES ( '$student_name', '$father_name', '$student_email', '$branch', '$enrollment', '$year','$percentage','$folder', '$hash', current_timestamp());";
                $result1= mysqli_query($conn,$insert);
                if($result1){
+                move_uploaded_file($tempname,$folder);
                 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Data Submitted !</strong> You can login now.
             <a href="student_login.php"><p>Login Now</p></a>
@@ -56,7 +60,7 @@
   <body>
    <div class="container ">
     <h2 class="text-center"style="margin-top: 37px;">Sign Up Form!</h2>
-   <form class="row g-3 my-3" action="" method="post">
+   <form class="row g-3 my-3" action="" method="post" enctype="multipart/form-data">
     <!-- Name -->
   <div class="col-md-6">
     <label for="validationDefault01" class="form-label">Name</label>
@@ -102,6 +106,11 @@
   <div class="col-md-6">
     <label for="validationDefault05" class="form-label">Percentage</label>
     <input type="number" class="form-control" id="validationDefault05" name="percentage" required>
+  </div>
+  <div class="col-md-6">
+  <label for="validationTextarea" class="form-label">Upload Resume</label>
+    <input type="file" class="form-control" aria-label="file example" name="resume" required>
+    <div class="invalid-feedback">upload resume in pdf</div>
   </div>
   <div class="col-md-6">
     <label for="validationDefault05" class="form-label">Password</label>
