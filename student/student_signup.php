@@ -81,9 +81,9 @@
     <label for="validationDefault04" class="form-label">Branch</label>
     <select class="form-select" id="validationDefault04" name="branch" required>
       <option selected disabled value="">Choose...</option>
-      <option>Computer Science & Engineering </option>
+      <option>Computer Science Engineering </option>
       <option>Civil Engineering</option>
-      <option>Mechanincal Engineering</option>
+      <option>Mechanical Engineering</option>
       <option>Electronics Engineering</option>
     </select>
   </div>

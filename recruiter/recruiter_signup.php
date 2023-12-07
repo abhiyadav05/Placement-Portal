@@ -8,6 +8,10 @@
         $salary=$_POST['salary'];
         $job_domain=$_POST['domain'];
         $company_name=$_POST['company_name'];
+        $branch=$_POST['branch'];
+        $requirement_branch=implode(",",$branch);
+        $year=$_POST['year'];
+        $requirement_year=implode(",",$year);
         $password=$_POST['password'];
         $cpassword=$_POST['cpassword'];
 
@@ -23,7 +27,7 @@
         else{
             if($password==$cpassword){
                 $hash=password_hash($password,PASSWORD_DEFAULT);
-                $insert="INSERT INTO `recruiter` (`recruiter_name`, `company_name`, `recruiter_email`, `domain`, `location`, `salary`, `password`, `post_date`) VALUES ('$recruiter_name', '$company_name', '$recruiter_email', '$job_domain', '$location', '$salary', '$hash', current_timestamp());
+                $insert="INSERT INTO `recruiter` (`recruiter_name`, `company_name`, `recruiter_email`, `domain`, `location`, `salary`,`requirement_branch`,`requirement_year`, `password`, `post_date`) VALUES ('$recruiter_name', '$company_name', '$recruiter_email', '$job_domain', '$location', '$salary','$requirement_branch','$requirement_year', '$hash', current_timestamp());
                 ";
                $result1= mysqli_query($conn,$insert);
                if($result1){
@@ -87,6 +91,36 @@
     <label for="validationDefault05" class="form-label">Salary</label>
     <input type="number" class="form-control" id="validationDefault05" name="salary" required>
   </div>
+
+  <div class="col-md-6">
+    Select Branch As Per Requirement
+  <div class="input-group-text my-2">
+    <input class="form-check-input mt-0" type="checkbox" value="Computer Science Engineering" aria-label="Checkbox for following text input" name="branch[]"><level class="mx-2" >Computer Science Engineering</level>
+  </div>
+  <div class="input-group-text my-2">
+    <input class="form-check-input mt-0" type="checkbox" value="Mechanical Engineering" aria-label="Checkbox for following text input" name="branch[]"><level class="mx-2">Mechanical Engineering</level>
+  </div>
+  <div class="input-group-text my-2">
+    <input class="form-check-input mt-0 mr-2" type="checkbox" value="Electronics Engineering" aria-label="Checkbox for following text input" name="branch[]"><level class="mx-2">Electronics Engineering</level>
+  </div>
+  <div class="input-group-text my-2">
+    <input class="form-check-input mt-0" type="checkbox" value="Civil Engineering" aria-label="Checkbox for following text input" name="branch[]"><level class="mx-2">Civil Engineering</level>
+  </div>
+  </div>
+
+  <div class="col-md-6">
+    Select Year As Per Requirement
+  <div class="input-group-text my-2">
+    <input class="form-check-input mt-0" type="checkbox" value="1" aria-label="Checkbox for following text input" name="year[]"><level class="mx-2">1</level>
+  </div>
+  <div class="input-group-text my-2">
+    <input class="form-check-input mt-0" type="checkbox" value="2" aria-label="Checkbox for following text input" name="year[]"><level class="mx-2">2</level>
+  </div>
+  <div class="input-group-text my-2">
+    <input class="form-check-input mt-0 mr-2" type="checkbox" value="3" aria-label="Checkbox for following text input" name="year[]"><level class="mx-2">3</level>
+  </div>
+  </div>
+
   <div class="col-md-6">
     <label for="validationDefault05" class="form-label">Password</label>
     <input type="password" class="form-control" id="validationDefault05" name="password" required>
